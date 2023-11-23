@@ -19,10 +19,18 @@ public class Compilador {
      * {@link StringTokenizer}
      */
     public StringTokenizer analisisLexico(String cadena) {
-        cadena = cadena.replace(" ", "");
+        /**cadena = cadena.replace(" ", "");
         StringTokenizer tokenizer = new StringTokenizer(cadena, "()\\+\\*\\-\\/", true);
+        while (tokenizer.hasMoreTokens()) {
+            String token = tokenizer.nextToken();
+            if (!token.matches("[0-9]*") && !token.matches("[()\\+\\*\\-\\/]")) {
+                throw new IllegalArgumentException("Error léxico: " + token);
+            }
+        }*/
+        cadena = cadena.replace(" ", "");
+        StringTokenizer tokenizer = new StringTokenizer(cadena, "()\\+\\*\\-\\/\\s\\t\\c\\r", true);
         return tokenizer;
-    }
+    } 
 
     /**
      * Método que devuelve un árbol de análisis sintáctico
